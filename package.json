@@ -1,0 +1,30 @@
+{
+  "name": "procedural-demo",
+  "version": "0.0.0",
+  "description": "A demonstration of the procedural package.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blixt/js-procedural-demo.git"
+  },
+  "author": "Blixt <me@blixt.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blixt/js-procedural-demo/issues"
+  },
+  "homepage": "https://github.com/blixt/js-procedural-demo",
+  "dependencies": {
+    "browserify": "^5.9.1",
+    "es6ify": "^1.2.0",
+    "gulp": "^3.8.6",
+    "gulp-browserify": "^0.5.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-util": "^3.0.0",
+    "merge": "^1.1.3",
+    "procedural": "^0.1.0"
+  }
+}
