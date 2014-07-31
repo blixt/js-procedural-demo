@@ -9,11 +9,8 @@ var universe = procedural('universe')
 var sector = universe.generates('sector')
   // The coordinates of the sector.
   .takes('x', 'y')
-  .provides('density', function (sector) {
-    // TODO: Perlin noise.
-    var value = sector.getRandGen().nextFloat();
-    return value * value * value;
-  });
+  // TODO: Perlin noise.
+  .provides('density', sector => Math.pow(sector.getRandGen().nextFloat(), 3));
 
 // A galaxy in space which may contain many stars.
 var galaxy = sector.generates('galaxy')
@@ -22,31 +19,22 @@ var galaxy = sector.generates('galaxy')
 // A cluster of stars in a galaxy.
 var cluster = galaxy.generates('cluster')
   .takes('x', 'y')
-  .provides('numStars', function (cluster) {
+  .provides('numStars', cluster => {
     // TODO: Something that generates a random spiral.
     return Math.floor(cluster.galaxy.sector.density * cluster.getRandGen().nextFloat(100));
   });
 
 // A star, which may have smaller bodies circling it.
 var star = cluster.generates('star')
-  .takes('number', function (star, number) {
-    return number > 0 && number <= star.cluster.numStars;
-  })
-  .provides('numPlanets', function (star) {
-    return star.getRandGen('planets').nextInt(0, 10);
-  });
+  .takes('number', (star, number) => number > 0 && number <= star.cluster.numStars)
+  .provides('numPlanets', star => star.getRandGen('planets').nextInt(0, 10));
 
 // A planet orbiting a star.
 var planet = star.generates('planet')
-  .takes('number', function (planet, number) {
-    return number > 0 && number <= planet.star.numPlanets;
-  })
-  .provides('distance', function (planet) {
-  })
-  .provides('mass', function (planet) {
-  })
-  .provides('volume', function (planet) {
-  });
+  .takes('number', (planet, number) => number > 0 && number <= planet.star.numPlanets)
+  .provides('distance', planet => null)
+  .provides('mass', planet => null)
+  .provides('volume', planet => null);
 
 // A satellite orbiting a planet.
 var satellite = planet.generates('satellite')
